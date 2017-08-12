@@ -3,37 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
-    <link rel="stylesheet" href="./assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="./assets/nprogress/nprogress.css">
-    <link rel="stylesheet" href="./less/index.css">
+    <?php include '/views/common/css.html'?>
 </head>
 <body>
     <!-- 登录 -->
     <div class="login">
         <div class="login-wrap">
             <div class="avatar">
-                <img src="./uploads/monkey.png" class="img-circle" alt="">
+                <img src="/views/public/uploads/monkey.png" class="img-circle" alt="">
             </div>
-            <form action="" class="col-md-offset-1 col-md-10">
+            <form action="" id="formLogin" class="col-md-offset-1 col-md-10">
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon">
                         <i class="fa fa-user"></i>
                     </span>
-                    <input type="text" class="form-control" placeholder="用户名">
+                    <input type="text" name="tc_name" class="form-control" placeholder="用户名">
                 </div>
                 <div class="input-group input-group-lg">
                     <span class="input-group-addon">
                         <i class="fa fa-key"></i>
                     </span>
-                    <input type="password" class="form-control" placeholder="密码">
+                    <input type="password" name="tc_pass" class="form-control" placeholder="密码">
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
             </form>
         </div>
     </div>
     
-    <script src="./assets/jquery/jquery.min.js"></script>
-    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/views/public/assets/jquery/jquery.min.js"></script>
+    <script src="/views/public/assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#formLogin').submit(function(){
+            var data = $(this).serialize();
+            $.ajax({
+                type:"post",
+                url:"/api/login",
+                data:data,
+                success:function(result){
+                    alert('恭喜你登录成功');
+                },
+                error:function(result){
+                    alert("用户名或密码输入错误");
+                }
+            })
+
+
+            return false; //不仅可以阻止时间冒泡,还可以阻止默认事件
+        })
+    </script>
 </body>
 </html>
