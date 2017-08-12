@@ -7,12 +7,11 @@
         $path = $_SERVER['PATH_INFO'];
         $path = substr($path,1);
         $pathArr = explode('/',$path);
-        $length = count($pathArr);
-        if(count($pathArr)<3){
-                $path = 'views/dashboard/'.$pathArr[$length-1];
-            }else{
-                $path = $_SERVER['PATH_INFO'];
-            }
+        if(count($pathArr) == 1){
+            $path = '/views/dashboard/'.$path;
+        }else if(count($pathArr) == 2){
+            $path = '/views/'.$path;
+        }
     }else{
         $path = 'views/dashboard/index';
     }
